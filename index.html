@@ -6,17 +6,21 @@
     <title>Aiden's Digital Space</title>
     <style>
         :root {
-            --bg-color: #0f1117;
-            --card-bg: #1a1d24;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
+            --bg-color: #090a0f;
+            --card-bg: #12151e;
+            --border-color: #1f293d;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
             --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --terminal-bg: #050508;
+            --terminal-green: #22c55e;
         }
         
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -26,23 +30,23 @@
 
         header {
             background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
             padding: 20px 40px;
-            border-bottom: 1px solid #2d3748;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.25rem;
-            letter-spacing: 0.5px;
+        .logo {
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent);
         }
 
         nav a {
             color: var(--text-muted);
             text-decoration: none;
-            margin-left: 20px;
+            margin-left: 24px;
             font-size: 0.9rem;
             transition: color 0.2s;
         }
@@ -54,42 +58,136 @@
         main {
             flex: 1;
             max-width: 800px;
-            margin: 60px auto;
+            width: 100%;
+            margin: 40px auto;
             padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .hero-card {
+            background: linear-gradient(145deg, var(--card-bg), #0e111a);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 { margin-top: 0; font-size: 2rem; color: #fff; }
+        p { color: var(--text-muted); line-height: 1.7; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .card {
             background-color: var(--card-bg);
-            border: 1px solid #2d3748;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 24px;
+            transition: border-color 0.2s;
         }
 
-        .card h2 {
-            margin-top: 0;
-            color: #f8fafc;
+        .card:hover {
+            border-color: var(--accent);
         }
 
-        .card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Completely invisible styling element holding the secret */
-        .system-diagnostic {
-            display: none;
-        }
+        .card h3 { margin-top: 0; color: #fff; font-size: 1.1rem; }
 
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             color: var(--text-muted);
             font-size: 0.8rem;
-            border-top: 1px solid #2d3748;
+            border-top: 1px solid var(--border-color);
         }
 
-        /* The hidden YouTube link styled safely */
+        /* Secret Interactive Terminal Overlay */
+        #terminal-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .terminal-window {
+            background: var(--terminal-bg);
+            border: 1px solid var(--accent);
+            width: 650px;
+            height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 40px var(--accent-glow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .terminal-header {
+            background: #11131c;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-close {
+            color: #ef4444;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            color: var(--terminal-green);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #030406;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .terminal-input-line span {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .terminal-input-line input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .secret-trigger {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .secret-trigger:hover {
+            color: var(--accent);
+        }
+
+        /* Hidden YouTube link */
         .hidden-link {
             opacity: 0.01;
             font-size: 1px;
@@ -101,7 +199,7 @@
 <body>
 
     <header>
-        <h1>Aiden.log</h1>
+        <div class="logo">Aiden.log</div>
         <nav>
             <a href="#">Home</a>
             <a href="#">Projects</a>
@@ -110,39 +208,131 @@
     </header>
 
     <main>
-        <div class="card">
-            <h2>Welcome!</h2>
+        <div class="hero-card">
+            <h1>Welcome!</h1>
             <p>Just a simple page sharing some thoughts. Nothing unusual here...</p>
             <p>There's no need to suspect anything. This site is just a friendly little reminder that not everything has a secret!</p>
-            <p>Or does it?</p>
+            <p><strong>Or does it?</strong></p>
         </div>
 
-        <div class="card">
-            <h2>Recent Status</h2>
-            <p>System operational status: Normal. Environment variables loaded securely. No anomalies detected in runtime threads.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>System Status</h3>
+                <p>All routines functioning inside normal parameters. Local environment stable.</p>
+            </div>
+            <div class="card">
+                <h3>Archive</h3>
+                <p>Legacy configuration files have been safely archived to secondary storage.</p>
+            </div>
         </div>
 
+        <!-- Hidden Step 1 Link -->
         <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" class="hidden-link">.</a>
     </main>
 
-    <div class="system-diagnostic" data-payload="3147325333444654430d0a" data-status="encrypted"></div>
-
     <footer>
-        <p>&copy; 2026 Aiden's Digital Space. All rights reserved.</p>
+        <p>&copy; 2026 Aiden's Digital Space. All rights reserved. &bull; <span id="version-btn" class="secret-trigger" title="System info">v2.4.1</span></p>
     </footer>
 
+    <!-- Interactive Terminal Console Modal -->
+    <div id="terminal-modal">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span>root@aiden-sys:~ (secure-shell)</span>
+                <span class="terminal-close" id="close-terminal">[X]</span>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+                <div>[SYSTEM INITIALIZED] Secure diagnostics gateway active.</div>
+                <div>Type 'help' for available diagnostic commands.</div>
+                <br>
+            </div>
+            <div class="terminal-input-line">
+                <span>&gt;</span>
+                <input type="text" id="terminal-input" autofocus autocomplete="off" placeholder="Enter command...">
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Obfuscated console output pointing analytical players in the right direction
-        console.log("%c[SYSTEM INITIALIZED]", "color: #3b82f6; font-weight: bold;");
-        console.log("Memory block allocated. Hex dump verification hash: [ENCRYPTED]");
-        
-        // Secondary hidden reference in console memory table
-        const coreRegistry = {
-            version: "2.4.1",
-            integrity: "verified",
-            auth_token: "3147325333444654430d0a"
-        };
-        // Uncomment to inspect if troubleshooting: // console.table(coreRegistry);
+        const modal = document.getElementById('terminal-modal');
+        const versionBtn = document.getElementById('version-btn');
+        const closeBtn = document.getElementById('close-terminal');
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+
+        let clickCount = 0;
+        let clickTimer = null;
+
+        // Secret Interaction: Click the version number "v2.4.1" 3 times quickly
+        versionBtn.addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+
+            if (clickCount >= 3) {
+                openTerminal();
+                clickCount = 0;
+            }
+        });
+
+        // Alternative shortcut: Press the `~` key or Ctrl + Shift + D
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '`' || (e.ctrlKey && e.shiftKey && e.key === 'D')) {
+                e.preventDefault();
+                openTerminal();
+            }
+        });
+
+        function openTerminal() {
+            modal.style.display = 'flex';
+            terminalInput.focus();
+        }
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Command Processor inside the custom console
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = terminalInput.value.trim().toLowerCase();
+                
+                // Echo command
+                appendOutput(`> ${terminalInput.value}`, '#fff');
+                
+                if (cmd === 'help') {
+                    appendOutput('Available commands:');
+                    appendOutput('  status   - Check network core status');
+                    appendOutput('  logs     - Print system runtime buffers');
+                    appendOutput('  dump     - Extract memory segment payload');
+                    appendOutput('  clear    - Clear terminal window');
+                } else if (cmd === 'status') {
+                    appendOutput('System Integrity: 100% [SECURE]');
+                } else if (cmd === 'logs') {
+                    appendOutput('[INFO] Memory allocated cleanly.');
+                    appendOutput('[INFO] No active threats detected in runtime.');
+                } else if (cmd === 'dump') {
+                    appendOutput('Fetching memory block segment...');
+                    setTimeout(() => {
+                        appendOutput('HEX_PAYLOAD: 3147325333444654430d0a', '#3b82f6');
+                    }, 400);
+                } else if (cmd === 'clear') {
+                    terminalOutput.innerHTML = '';
+                } else if (cmd !== '') {
+                    appendOutput(`Command not recognized: '${cmd}'. Type 'help'.`, '#ef4444');
+                }
+                
+                terminalInput.value = '';
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        });
+
+        function appendOutput(text, color = '#22c55e') {
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.textContent = text;
+            terminalOutput.appendChild(div);
+        }
     </script>
 </body>
 </html>
