@@ -499,12 +499,12 @@ TCP    [::1]:8080             [::1]:49152            TIME_WAIT\n`);
 - Key: /cube/sys/storage/mount -> "/mnt/vault/core"\n`);
                 } else if (cmd === 'memread') {
                     appendOutput(`[RAW MEMORY HEAP DUMP - SECTOR 0x7FFF]
-0x00a0: 48 65 6c 6c 6f 20 57 6f 72 6c 64 20 00 00 01 f4
-0x00b0: 73 79 73 5f 69 6e 69 74 5f 6f 6b 00 12 34 56 78
-0x00c0: 31 47 32 53 33 44 46 54 43 0d 0a 00 99 88 77 66
-0x00d0: 61 75 74 68 5f 74 6f 6b 65 6e 5f 76 61 6c 69 64
-0x00e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-[HEAP TRACE COMPLETE: No critical faults detected]\n`);
+0x00a0: 48656c6c6f20576f726c6420000001f4
+0x00b0: 7379735f696e69745f6f6b0012345678
+0x00c0: 3147325333444654430d0a0099887766
+0x00d0: 617574685f746f6b656e5f76616c6964
+0x00e0: 00000000000000000000000000000000
+[HEAP TRACE COMPLETE: 3 invalid files found. Requesting Redo]\n`);
                 } else if (cmd === 'dump') {
                     appendOutput(`[CORE PAYLOAD EXTRACTION ROUTINE]
 Initiating dump sequence across legacy buffer layers...
