@@ -15,6 +15,8 @@
             --accent-glow: rgba(59, 130, 246, 0.15);
             --danger: #ef4444;
             --success: #22c55e;
+            --terminal-bg: #050508;
+            --terminal-green: #22c55e;
         }
         
         body {
@@ -35,6 +37,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -61,7 +66,7 @@
 
         main {
             flex: 1;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             margin: 40px auto;
             padding: 0 20px;
@@ -92,7 +97,9 @@
         }
 
         h2 { margin-top: 0; color: #fff; font-size: 1.5rem; }
-        p { color: var(--text-muted); line-height: 1.7; }
+        h3 { color: #e2e8f0; font-size: 1.1rem; margin-top: 20px; }
+        p, li { color: var(--text-muted); line-height: 1.7; font-size: 0.95rem; }
+        ul { padding-left: 20px; }
 
         .interactive-btn {
             background: var(--accent);
@@ -119,6 +126,90 @@
             width: 70%;
             font-family: inherit;
             margin-right: 10px;
+        }
+
+        /* Terminal Modal */
+        #terminal-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .terminal-window {
+            background: var(--terminal-bg);
+            border: 1px solid var(--accent);
+            width: 750px;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 40px var(--accent-glow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .terminal-header {
+            background: #11131c;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-close {
+            color: #ef4444;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            color: var(--terminal-green);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #030406;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .terminal-input-line span {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .terminal-input-line input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .secret-trigger {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .secret-trigger:hover {
+            color: var(--accent);
         }
 
         footer {
@@ -154,24 +245,43 @@
         <!-- HOME TAB -->
         <div id="home" class="tab-pane active">
             <div class="card">
-                <h2>Welcome!</h2>
-                <p>Just a simple page sharing some thoughts. Nothing unusual here...</p>
+                <h2>Welcome to Cube's Digital Domain</h2>
+                <p>Just a simple page sharing some thoughts, development logs, and random technical musings. Nothing unusual here...</p>
                 <p>There's no need to suspect anything. This site is just a friendly little reminder that not everything has a secret!</p>
                 <p><strong>Or does it?</strong></p>
+                
+                <h3>Recent Transmission - September 2026</h3>
+                <p>Lately I've been spending a lot of time rewriting my local storage managers and auditing network protocols. The transition from legacy v1 node structures to decentralized bucket arrays hasn't been entirely seamless, but performance metrics indicate an overall 14.2% latency drop across secondary relays.</p>
+                <p>Make sure you check out the Projects page for a complete itemized list of deprecated packages and active subroutines currently awaiting code review.</p>
+            </div>
+            <div class="card">
+                <h3>Changelog & Site Philosophy v2.4</h3>
+                <p>Transparency is core to everything we build here at Cube.log. Below are our core operational tenets:</p>
+                <ul>
+                    <li>Absolute modularity across multi-tiered runtime hooks.</li>
+                    <li>Zero tolerance for unverified memory segments.</li>
+                    <li>Strict adherence to local cache hygiene and state preservation.</li>
+                </ul>
             </div>
             <!-- Hidden Step 1 YouTube Link -->
             <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" class="hidden-link">.</a>
         </div>
 
-        <!-- PROJECTS TAB (Decoy Lockout) -->
+        <!-- PROJECTS TAB -->
         <div id="projects" class="tab-pane">
             <div class="card">
-                <h2>Active Repositories</h2>
-                <p>Publicly indexed codebases and utility modules currently in deployment.</p>
+                <h2>Active Repositories & Modules</h2>
+                <p>Publicly indexed codebases, experimental toolchains, and utility packages currently deployed across personal test environments.</p>
                 
-                <div style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                    <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 5px;">🔒 Project: Overseer (Classified)</h3>
-                    <p style="font-size: 0.85rem;">Requires security clearance token to decrypt directory payload.</p>
+                <h3>1. Project: Vector-Engine (v1.9.4)</h3>
+                <p>A lightweight matrix calculation framework designed for spatial coordinate mapping and vector interpolation. Optimized for low-overhead client rendering pipelines.</p>
+                
+                <h3>2. Project: Node-Scraper (v0.8.1)</h3>
+                <p>Automated index crawler built to parse directory structures and verify file integrity hashes across distributed web nodes.</p>
+                
+                <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                    <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 5px;">🔒 Project: Overseer (Classified Branch)</h3>
+                    <p style="font-size: 0.85rem;">Requires security clearance token or internal root vector to decrypt directory payload.</p>
                     <div style="margin-top: 10px;">
                         <input type="text" id="project-pass" placeholder="Enter clearance code...">
                         <button class="interactive-btn" onclick="testProjectPass()">Verify</button>
@@ -181,16 +291,18 @@
             </div>
         </div>
 
-        <!-- SYSTEM STATUS TAB (Mock Error Logs) -->
+        <!-- SYSTEM STATUS TAB -->
         <div id="system" class="tab-pane">
             <div class="card">
-                <h2>Diagnostics & Telemetry</h2>
-                <p>All core infrastructure nodes are reporting standard nominal operating parameters.</p>
+                <h2>Diagnostics & Telemetry Dashboard</h2>
+                <p>All core infrastructure nodes are reporting standard nominal operating parameters. Real-time logging buffer active.</p>
                 
-                <div style="background:#050608; border:1px solid var(--border-color); padding:15px; border-radius:6px; margin-top:15px; font-family:monospace; font-size:0.8rem; color:#64748b;">
-                    [09:12:04] CORE_INIT: Thread pool online.<br>
+                <div style="background:#050608; border:1px solid var(--border-color); padding:15px; border-radius:6px; margin-top:15px; font-family:monospace; font-size:0.8rem; color:#64748b; height: 150px; overflow-y: auto;">
+                    [09:12:04] CORE_INIT: Thread pool online [Worker ID: 0x44F].<br>
                     [09:12:05] MEM_CHECK: 0x8842F locked. Integrity secure.<br>
-                    [09:12:11] WARNING: Subroutine buffer trace returned non-standard checksum.<br>
+                    [09:12:08] CACHE_FLUSH: Purged 142 orphaned temp records.<br>
+                    [09:12:11] WARNING: Subroutine buffer trace returned non-standard checksum on sector 9.<br>
+                    [09:12:15] NET_SYNC: Handshake established with upstream gateway [OK].<br>
                     [09:12:18] STATUS: Nominal. No user intervention required.
                 </div>
                 
@@ -199,18 +311,22 @@
             </div>
         </div>
 
-        <!-- ARCHIVE TAB (Hidden Hex Location) -->
+        <!-- ARCHIVE TAB -->
         <div id="archive" class="tab-pane">
             <div class="card">
                 <h2>Legacy Storage Vault</h2>
-                <p>Older iterations of system configs and deprecated text logs.</p>
-                <p><em>Note: Most records from version 1.x have been permanently scrubbed.</em></p>
+                <p>Older iterations of system configurations, deprecated text logs, and discarded manifest records from previous development cycles.</p>
+                <p><em>Note: Most historical records from version 1.x have been permanently scrubbed for security compliance.</em></p>
                 
-                <!-- Real Hex Code tucked safely into a custom attribute here -->
-                <div id="vault-core" data-payload="3147325333444654430d0a" style="display:none;"></div>
+                <h3>Archived Index Manifest (v1.0 - v1.9)</h3>
+                <ul>
+                    <li>config_backup_old.json (Size: 42 KB) - Status: Archived</li>
+                    <li>network_routes_v1.bak (Size: 118 KB) - Status: Purged</li>
+                    <li>kernel_registry_dump.bin (Size: 512 KB) - Status: Encrypted/Nullified</li>
+                </ul>
                 
                 <div style="margin-top: 20px; padding: 15px; background: #050608; border-radius: 6px; border: 1px solid var(--border-color);">
-                    <p style="font-size: 0.85rem; margin:0;">Vault state: Empty. No readable sector items found on this layer.</p>
+                    <p style="font-size: 0.85rem; margin:0;">Vault state: Stabilized. No active readable sector items found on this layer.</p>
                 </div>
             </div>
         </div>
@@ -219,15 +335,34 @@
         <div id="about" class="tab-pane">
             <div class="card">
                 <h2>About the Developer</h2>
-                <p>Building small tools, experimenting with web interfaces, and tinkering with logic puzzles.</p>
+                <p>Building small tools, experimenting with web interfaces, writing documentation, and tinkering with logic puzzles in my spare time.</p>
+                <h3>Technical Background</h3>
+                <p>Passionate about low-level system design, script execution flow, and minimalist UI architecture. When I'm not writing code, I'm usually testing out puzzle logic designs or reviewing database schemas.</p>
                 <p>If you're reading this, remember to check beneath the surface—not everything is presented right on the screen.</p>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Cube's Digital Space. All rights reserved. &bull; v2.4.1</p>
+        <p>&copy; 2026 Cube's Digital Space. All rights reserved. &bull; <span id="version-btn" class="secret-trigger" title="System info">v2.4.1</span></p>
     </footer>
+
+    <!-- Interactive Terminal Console Modal -->
+    <div id="terminal-modal">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span>root@cube-sys:~ (secure-shell-v2.4)</span>
+                <span class="terminal-close" id="close-terminal">[X]</span>
+            </div>
+            <div class="terminal-body" id="terminal-output">[SYSTEM INITIALIZED] Secure diagnostics gateway active.
+Type 'help' for a list of available diagnostic and system commands.
+</div>
+            <div class="terminal-input-line">
+                <span>&gt;</span>
+                <input type="text" id="terminal-input" autofocus autocomplete="off" placeholder="Enter command...">
+            </div>
+        </div>
+    </div>
 
     <script>
         function switchTab(tabId) {
@@ -261,6 +396,136 @@
                 out.style.color = "var(--success)";
                 out.textContent = "Scan complete. 0 anomalies detected. (Everything looks clean here!)";
             }, 800);
+        }
+
+        // Terminal & Secret Trigger Logic
+        const modal = document.getElementById('terminal-modal');
+        const versionBtn = document.getElementById('version-btn');
+        const closeBtn = document.getElementById('close-terminal');
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+
+        let clickCount = 0;
+        let clickTimer = null;
+
+        versionBtn.addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+
+            if (clickCount >= 3) {
+                openTerminal();
+                clickCount = 0;
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '`') {
+                e.preventDefault();
+                openTerminal();
+            }
+        });
+
+        function openTerminal() {
+            modal.style.display = 'flex';
+            terminalInput.focus();
+        }
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = terminalInput.value.trim().toLowerCase();
+                
+                appendOutput(`> ${terminalInput.value}\n`, '#fff');
+                
+                if (cmd === 'help') {
+                    appendOutput(`Available commands:
+  status     - Check network core status & cluster health
+  logs       - Print system runtime buffers & event history
+  sysinfo    - Display hardware nodes and CPU thread details
+  netstat    - List active TCP/IP sockets and gateway relays
+  ping       - Test loopback latency on local domain
+  registry   - Query configuration keys and subsystem parameters
+  memread    - Dump raw memory heap sectors and buffer fragments
+  dump       - Extract legacy core payload tokens
+  clear      - Clear terminal window
+`);
+                } else if (cmd === 'status') {
+                    appendOutput(`[CLUSTER HEALTH REPORT]
+Node 01: ONLINE [Latency: 1.2ms]
+Node 02: ONLINE [Latency: 1.4ms]
+Node 03: STANDBY [Sync State: Idle]
+Core Firewall: ACTIVE
+Overall System Integrity: 100% [SECURE]\n`);
+                } else if (cmd === 'logs') {
+                    appendOutput(`[SYSTEM BUFFER TRACE]
+[08:00:12] Kernel bootstrap completed successfully.
+[08:15:30] Allocated 512MB heap space for worker threads.
+[09:02:44] Warning: Non-fatal exception caught in buffer stream 0x4B.
+[09:12:04] CORE_INIT: Thread pool online [Worker ID: 0x44F].
+[09:20:11] Garbage collection sweep cleared 142 dead references.
+[10:04:55] Security audit routine finished with zero flags.\n`);
+                } else if (cmd === 'sysinfo') {
+                    appendOutput(`[HARDWARE & RUNTIME SPECIFICATION]
+Architecture: x86_64-multi-threaded
+Virtual Cores: 8 active execution threads
+Memory Allocated: 2048 MB / 8192 MB Max Threshold
+Uptime: 42 hours, 14 minutes, 09 seconds
+OS Build: CubeOS-Kernel v2.4.1-release\n`);
+                } else if (cmd === 'netstat') {
+                    appendOutput(`[ACTIVE SOCKET CONNECTIONS]
+Proto  Local Address          Foreign Address        State
+TCP    127.0.0.1:443          127.0.0.1:54210        ESTABLISHED
+TCP    192.168.1.15:80        10.0.0.4:3892          ESTABLISHED
+UDP    0.0.0.0:5353           *.*                    LISTENING
+TCP    [::1]:8080             [::1]:49152            TIME_WAIT\n`);
+                } else if (cmd === 'ping') {
+                    appendOutput(`PONG 127.0.0.1: 32 bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.034 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.028 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.031 ms
+--- 127.0.0.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2040ms\n`);
+                } else if (cmd === 'registry') {
+                    appendOutput(`[CONFIGURATION REGISTRY HIVE]
+- Key: /cube/sys/core/version -> "2.4.1"
+- Key: /cube/sys/auth/mode -> "strict"
+- Key: /cube/sys/net/timeout -> 3000ms
+- Key: /cube/sys/cache/policy -> "aggressive"
+- Key: /cube/sys/sec/enforce -> true
+- Key: /cube/sys/storage/mount -> "/mnt/vault/core"\n`);
+                } else if (cmd === 'memread') {
+                    appendOutput(`[RAW MEMORY HEAP DUMP - SECTOR 0x7FFF]
+0x00a0: 48 65 6c 6c 6f 20 57 6f 72 6c 64 20 00 00 01 f4
+0x00b0: 73 79 73 5f 69 6e 69 74 5f 6f 6b 00 12 34 56 78
+0x00c0: 31 47 32 53 33 44 46 54 43 0d 0a 00 99 88 77 66
+0x00d0: 61 75 74 68 5f 74 6f 6b 65 6e 5f 76 61 6c 69 64
+0x00e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[HEAP TRACE COMPLETE: No critical faults detected]\n`);
+                } else if (cmd === 'dump') {
+                    appendOutput(`[CORE PAYLOAD EXTRACTION ROUTINE]
+Initiating dump sequence across legacy buffer layers...
+Analyzing block segments...
+[WARN]: Core token storage register is restricted. Please query raw memory sectors using 'memread' or inspect system logs for unmasked fragments.\n`, '#3b82f6');
+                } else if (cmd === 'clear') {
+                    terminalOutput.innerHTML = '';
+                } else if (cmd !== '') {
+                    appendOutput(`Command not recognized: '${cmd}'. Type 'help' to review available terminal commands.\n`, '#ef4444');
+                }
+                
+                terminalInput.value = '';
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        });
+
+        function appendOutput(text, color = '#22c55e') {
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.textContent = text;
+            terminalOutput.appendChild(div);
         }
     </script>
 </body>
