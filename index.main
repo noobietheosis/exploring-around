@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiden's Digital Space</title>
+    <style>
+        :root {
+            --bg-color: #0f1117;
+            --card-bg: #1a1d24;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 40px;
+            border-bottom: 1px solid #2d3748;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #f8fafc;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Completely invisible styling element holding the secret */
+        .system-diagnostic {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid #2d3748;
+        }
+
+        /* The hidden YouTube link styled safely */
+        .hidden-link {
+            opacity: 0.01;
+            font-size: 1px;
+            color: var(--bg-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Aiden.log</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">About</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Welcome!</h2>
+            <p>Just a simple page sharing some thoughts. Nothing unusual here...</p>
+            <p>There's no need to suspect anything. This site is just a friendly little reminder that not everything has a secret!</p>
+            <p>Or does it?</p>
+        </div>
+
+        <div class="card">
+            <h2>Recent Status</h2>
+            <p>System operational status: Normal. Environment variables loaded securely. No anomalies detected in runtime threads.</p>
+        </div>
+
+        <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" class="hidden-link">.</a>
+    </main>
+
+    <div class="system-diagnostic" data-payload="3147325333444654430d0a" data-status="encrypted"></div>
+
+    <footer>
+        <p>&copy; 2026 Aiden's Digital Space. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Obfuscated console output pointing analytical players in the right direction
+        console.log("%c[SYSTEM INITIALIZED]", "color: #3b82f6; font-weight: bold;");
+        console.log("Memory block allocated. Hex dump verification hash: [ENCRYPTED]");
+        
+        // Secondary hidden reference in console memory table
+        const coreRegistry = {
+            version: "2.4.1",
+            integrity: "verified",
+            auth_token: "3147325333444654430d0a"
+        };
+        // Uncomment to inspect if troubleshooting: // console.table(coreRegistry);
+    </script>
+</body>
+</html>
